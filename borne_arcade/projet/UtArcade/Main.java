@@ -40,9 +40,9 @@ public class Main{
         else
         {
             vies = 5;
-            vitesseCoeur = 5;
-            vitesseObstaclesMin = 4;
-            vitesseObstaclesMax = 8;
+            vitesseCoeur = 4;
+            vitesseObstaclesMin = 3;
+            vitesseObstaclesMax = 6;
             tailleObstacles = 15;
         }
         reponse.close();
@@ -165,10 +165,17 @@ public class Main{
         Musique musique = new Musique("musique.mp3");
         musique.lecture();
 
+        long dernierTemps = System.nanoTime();
+
         while(vies > 0)
         {
+            long frameStart = System.nanoTime();
+            long tempsActuel = System.nanoTime();
+            double deltaTime = (tempsActuel - dernierTemps) / 1_000_000_000.0;
+            dernierTemps = tempsActuel;
+
+
             try{
-            Thread.sleep(10);
             f.supprimer(menu1);
             f.supprimer(menu2);
             f.supprimer(infos1);
@@ -191,66 +198,42 @@ public class Main{
 
 
 
+            int v = (int)Math.round(vitesseCoeur * deltaTime * 60);
             if (clavier.getHautEnfoncee() && !collisionH) {
-                coeur_millieu.translater(0, vitesseCoeur);
-                coeur_haut1.translater(0, vitesseCoeur);
-                coeur_haut2.translater(0, vitesseCoeur);
-            }
-            else if (collisionH)
-            {
-                coeur_millieu.translater(0, 0);
-                coeur_haut1.translater(0, 0);
-                coeur_haut2.translater(0, 0);
+                coeur_millieu.translater(0, v);
+                coeur_haut1.translater(0, v);
+                coeur_haut2.translater(0, v);
             }
 
             if (clavier.getBasEnfoncee() && !collisionB) {
-                coeur_millieu.translater(0, -vitesseCoeur);
-                coeur_haut1.translater(0, -vitesseCoeur);
-                coeur_haut2.translater(0, -vitesseCoeur);
-            }
-            else if (collisionB)
-            {
-                coeur_millieu.translater(0, 0);
-                coeur_haut1.translater(0, 0);
-                coeur_haut2.translater(0, 0);
+                coeur_millieu.translater(0, -v);
+                coeur_haut1.translater(0, -v);
+                coeur_haut2.translater(0, -v);
             }
 
-            if (clavier.getDroiteEnfoncee() && !collisionD) 
-            {
-                coeur_millieu.translater(vitesseCoeur, 0);
-                coeur_haut1.translater(vitesseCoeur, 0);
-                coeur_haut2.translater(vitesseCoeur, 0);
-            }
-            else if (collisionD)
-            {
-                coeur_millieu.translater(0, 0);
-                coeur_haut1.translater(0, 0);
-                coeur_haut2.translater(0, 0);
+            if (clavier.getDroiteEnfoncee() && !collisionD) {
+                coeur_millieu.translater(v, 0);
+                coeur_haut1.translater(v, 0);
+                coeur_haut2.translater(v, 0);
             }
 
             if (clavier.getGaucheEnfoncee() && !collisionG) {
-                coeur_millieu.translater(-vitesseCoeur, 0);
-                coeur_haut1.translater(-vitesseCoeur, 0);
-                coeur_haut2.translater(-vitesseCoeur, 0);
-            }
-            else if (collisionG)
-            {
-                coeur_millieu.translater(0, 0);
-                coeur_haut1.translater(0, 0);
-                coeur_haut2.translater(0, 0);
+                coeur_millieu.translater(-v, 0);
+                coeur_haut1.translater(-v, 0);
+                coeur_haut2.translater(-v, 0);
             }
 
 
-            deplacer(obstacle1, o1 , v1);
-            deplacer(obstacle2, o2 , v2);
-            deplacer(obstacle3, o3 , v3);
-            deplacer(obstacle4, o4 , v4);
-            deplacer(obstacle5, o5 , v5);
-            deplacer(obstacle6, o6 , v6);
-            deplacer(obstacle7, o7 , v7);
-            deplacer(obstacle8, o8 , v8);
-            deplacer(obstacle9, o9 , v9);
-            deplacer(obstacle10, o10 , v10);
+            deplacer(obstacle1, o1 , v1, deltaTime);
+            deplacer(obstacle2, o2 , v2, deltaTime);
+            deplacer(obstacle3, o3 , v3, deltaTime);
+            deplacer(obstacle4, o4 , v4, deltaTime);
+            deplacer(obstacle5, o5 , v5, deltaTime);
+            deplacer(obstacle6, o6 , v6, deltaTime);
+            deplacer(obstacle7, o7 , v7, deltaTime);
+            deplacer(obstacle8, o8 , v8, deltaTime);
+            deplacer(obstacle9, o9 , v9, deltaTime);
+            deplacer(obstacle10, o10 , v10, deltaTime);
 
 
             boolean collision1 = obstacle1.intersection(boiteCoeur_HG) || obstacle1.intersection(boiteCoeur_BD);
@@ -399,6 +382,13 @@ public class Main{
 
             f.rafraichir();
 
+                long frameTime = System.nanoTime() - frameStart;
+                long sleepTime = (16_666_666 - frameTime) / 1_000_000;
+
+    if (sleepTime > 0)
+        Thread.sleep(sleepTime);
+
+        }catch(Exception e){}
         }
 
         f.effacer();
@@ -484,41 +474,45 @@ public class Main{
         }
     }
 
-    public static void deplacer( Cercle obs , int direction , int vit)
+public static void deplacer(Cercle obs, int direction, int vit, double deltaTime)
+{
+    double v = vit * deltaTime * 60;
+    int vx = (int)Math.round(v);
+    int vdiag = (int)Math.round(v / Math.sqrt(2.0));
+
+    if (direction == 0)
     {
-        if (direction == 0)
-        {
-            obs.translater(vit ,0);
-        }
-        else if (direction == 1)
-        {
-            obs.translater(0 ,vit);
-        }
-        else if (direction == 2)
-        {
-            obs.translater(0 ,-vit);
-        }
-        else if (direction == 3)
-        {
-            obs.translater(-vit ,0);
-        }
-        else if (direction == 4 || direction == 9)
-        {
-            obs.translater(-(int)(vit/Math.sqrt(2.0)) ,(int)(vit/Math.sqrt(2.0)));
-        }
-        else if (direction == 5 || direction == 7)
-        {
-            obs.translater((int)(vit/Math.sqrt(2.0)) ,(int)(vit/Math.sqrt(2.0)));
-        }
-        else if (direction == 6 || direction == 11)
-        {
-            obs.translater((int)(vit/Math.sqrt(2.0)) ,-(int)(vit/Math.sqrt(2.0)));
-        }
-        else if (direction == 8 || direction == 10)
-        {
-            obs.translater(-(int)(vit/Math.sqrt(2.0)) ,-(int)(vit/Math.sqrt(2.0)));
-        }
+        obs.translater(vx ,0);
     }
+    else if (direction == 1)
+    {
+        obs.translater(0 ,vx);
+    }
+    else if (direction == 2)
+    {
+        obs.translater(0 ,-vx);
+    }
+    else if (direction == 3)
+    {
+        obs.translater(-vx ,0);
+    }
+    else if (direction == 4 || direction == 9)
+    {
+        obs.translater(-vdiag ,vdiag);
+    }
+    else if (direction == 5 || direction == 7)
+    {
+        obs.translater(vdiag ,vdiag);
+    }
+    else if (direction == 6 || direction == 11)
+    {
+        obs.translater(vdiag ,-vdiag);
+    }
+    else if (direction == 8 || direction == 10)
+    {
+        obs.translater(-vdiag ,-vdiag);
+    }
+}
 
     public static boolean sortie( Cercle obs )
     {
