@@ -51,7 +51,7 @@ c'est à dire le rôle de chaque touche, dans cet ordre :
 ```Joystick bouton_haut_gauche:bouton_haut_centre:bouton_haut_droit:bouton_bas_gauche:bouton_bas_centre:bouton_bas_droit```.
 
 ### Photo
-Une photo nommée `image_small.png`, qui s'affichera quand le sélecteur sera sur votre jeu.
+Une photo nommée `photo_small.png`, qui s'affichera quand le sélecteur sera sur votre jeu.
 
 ### Description
 Le fichier `description.txt`, un court texte descriptif de votre jeu. Passez régulièrement des lignes, même au cours d'une phrase, pour éviter que le texte sorte du cadre d'affichage.
