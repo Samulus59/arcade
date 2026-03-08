@@ -51,7 +51,12 @@ public class Main{
         double points = 0;
 
         Fenetre f = new Fenetre("Mon jeu" , 800 , 700);
-        Clavier clavier = f.getClavier();
+        //Clavier clavier = f.getClavier();
+        ClavierBorneArcade clavier = new ClavierBorneArcade();
+
+        clavier = new ClavierBorneArcade();
+        f.addKeyListener(clavier);
+        f.getP().addKeyListener(clavier);
 
         Rectangle fond = new Rectangle (Couleur.NOIR, new Point(0,0), new Point(800,700), true);
         Rectangle cadre_haut = new Rectangle (Couleur.BLANC, new Point(100,595), new Point(700,600), true);
@@ -64,7 +69,7 @@ public class Main{
         Cercle coeur_haut2 = new Cercle(Couleur.ROUGE, new Point(416,351), 5, true);
 
         Texte menu1 = new Texte(new Texte(Couleur.BLANC, "Utilisez les flèches directionnelles pour \n esquiver les projectiles", new Font("Arial", Font.TYPE1_FONT, 25), new Point(400,550)));
-        Texte menu2 = new Texte(new Texte(Couleur.BLANC, "Appuyez sur Entrer pour commencer", new Font("Arial", Font.TYPE1_FONT, 30), new Point(400,500)));
+        Texte menu2 = new Texte(new Texte(Couleur.BLANC, "Appuyez sur A pour commencer", new Font("Arial", Font.TYPE1_FONT, 30), new Point(400,500)));
 
 
         Texte infos1 = new Texte(Couleur.VERT, (int) points + "pts", new Font("Arial", Font.TYPE1_FONT, 25), new Point(50,700));
@@ -106,7 +111,7 @@ public class Main{
 
         while (!lancer) 
         {
-            if (clavier.getEntreeTape())
+            if (clavier.getBoutonJ1ATape())
                 lancer = true;
 
             f.rafraichir();
@@ -198,25 +203,25 @@ public class Main{
 
 
             int v = (int)Math.round(vitesseCoeur * deltaTime * 60);
-            if (clavier.getHautEnfoncee() && !collisionH) {
+            if (clavier.getJoyJ1HautEnfoncee() && !collisionH) {
                 coeur_millieu.translater(0, v);
                 coeur_haut1.translater(0, v);
                 coeur_haut2.translater(0, v);
             }
 
-            if (clavier.getBasEnfoncee() && !collisionB) {
+            if (clavier.getJoyJ1BasEnfoncee() && !collisionB) {
                 coeur_millieu.translater(0, -v);
                 coeur_haut1.translater(0, -v);
                 coeur_haut2.translater(0, -v);
             }
 
-            if (clavier.getDroiteEnfoncee() && !collisionD) {
+            if (clavier.getJoyJ1DroiteEnfoncee() && !collisionD) {
                 coeur_millieu.translater(v, 0);
                 coeur_haut1.translater(v, 0);
                 coeur_haut2.translater(v, 0);
             }
 
-            if (clavier.getGaucheEnfoncee() && !collisionG) {
+            if (clavier.getJoyJ1GaucheEnfoncee() && !collisionG) {
                 coeur_millieu.translater(-v, 0);
                 coeur_haut1.translater(-v, 0);
                 coeur_haut2.translater(-v, 0);
