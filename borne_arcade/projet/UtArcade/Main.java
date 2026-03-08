@@ -41,8 +41,8 @@ public class Main{
         {
             vies = 5;
             vitesseCoeur = 4;
-            vitesseObstaclesMin = 3;
-            vitesseObstaclesMax = 6;
+            vitesseObstaclesMin = 4;
+            vitesseObstaclesMax = 8;
             tailleObstacles = 15;
         }
         reponse.close();
@@ -81,18 +81,17 @@ public class Main{
         int o9 = (int) (Math.random()*12);
         int o10 = (int) (Math.random()*12);
 
-        vitesseObstaclesMax++;
 
-        int v1 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
-        int v2 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
-        int v3 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
-        int v4 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
-        int v5 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
-        int v6 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
-        int v7 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
-        int v8 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
-        int v9 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
-        int v10 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
+        int v1 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
+        int v2 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
+        int v3 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
+        int v4 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
+        int v5 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
+        int v6 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
+        int v7 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
+        int v8 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
+        int v9 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
+        int v10 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
 
         f.ajouter(fond);
 
@@ -302,7 +301,7 @@ public class Main{
             if (sortie(obstacle1))
             {
                 o1 = (int) (Math.random()*12);
-                v1 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
+                v1 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
                 points += 0.2;
                 replacerPoint(obstacle1, o1);
             }
@@ -310,7 +309,7 @@ public class Main{
             if (sortie(obstacle2))
             {
                 o2 = (int) (Math.random()*12);
-                v2 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
+                v2 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
                 points += 0.2;
                 replacerPoint(obstacle2, o2);
             }
@@ -318,7 +317,7 @@ public class Main{
             if (sortie(obstacle3))
             {
                 o3 = (int) (Math.random()*12);
-                v3 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
+                v3 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
                 points += 0.2;
                 replacerPoint(obstacle3, o3);
             }
@@ -326,7 +325,7 @@ public class Main{
             if (sortie(obstacle4))
             {
                 o4 = (int) (Math.random()*12);
-                v4 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
+                v4 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
                 points += 0.2;
                 replacerPoint(obstacle4, o4);
             }
@@ -334,7 +333,7 @@ public class Main{
             if (sortie(obstacle5))
             {
                 o5 = (int) (Math.random()*12);
-                v5 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
+                v5 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
                 points += 0.2;
                 replacerPoint(obstacle5, o5);
             }
@@ -342,7 +341,7 @@ public class Main{
             if (sortie(obstacle6))
             {
                 o6 = (int) (Math.random()*12);
-                v6 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
+                v6 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
                 points += 0.2;
                 replacerPoint(obstacle6, o6);
             }
@@ -350,7 +349,7 @@ public class Main{
             if (sortie(obstacle7))
             {
                 o7 = (int) (Math.random()*12);
-                v7 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
+                v7 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
                 points += 0.2;
                 replacerPoint(obstacle7, o7);
             }
@@ -358,7 +357,7 @@ public class Main{
             if (sortie(obstacle8))
             {
                 o8 = (int) (Math.random()*12);
-                v8 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
+                v8 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
                 points += 0.2;
                 replacerPoint(obstacle8, o8);
             }
@@ -366,7 +365,7 @@ public class Main{
             if (sortie(obstacle9))
             {
                 o9 = (int) (Math.random()*12);
-                v9 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
+                v9 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
                 points += 0.2;
                 replacerPoint(obstacle9, o9);
             }
@@ -374,7 +373,7 @@ public class Main{
             if (sortie(obstacle10))
             {
                 o10 = (int) (Math.random()*12);
-                v10 = (int) (Math.random()*vitesseObstaclesMax) + vitesseObstaclesMin;
+                v10 = (int)(Math.random() * (vitesseObstaclesMax - vitesseObstaclesMin + 1)) + vitesseObstaclesMin;
                 points += 0.2;
                 replacerPoint(obstacle10, o10);
             }
